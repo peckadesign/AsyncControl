@@ -43,7 +43,11 @@ trait AsyncControlTrait
 
 	public function renderAsync(string $linkMessage = NULL, array $linkAttributes = NULL)
 	{
-		if ($this instanceof Control && strpos((string) $this->getPresenter()->getParameter(Presenter::SIGNAL_KEY), sprintf('%s-', $this->getUniqueId())) !== 0) {
+		if (
+			$this instanceof Control
+			&& $this->getPresenter()->getParameter('_escaped_fragment_') === NULL
+			&& strpos((string) $this->getPresenter()->getParameter(Presenter::SIGNAL_KEY), sprintf('%s-', $this->getUniqueId())) !== 0
+		) {
 			$template = $this->createTemplate();
 			$template->link = new AsyncControlLink($linkMessage, $linkAttributes);
 			$template->setFile(__DIR__ . '/templates/asyncLoadLink.latte');
