@@ -1,0 +1,14 @@
+{
+	"name": "async.nette.ajax.js",
+	"homepage": "https://github.com/peckadesign/AsyncControl",
+	"authors": [
+		"PeckaDesign <support@peckadesign.cz>",
+		"Vít Kutný <vit.kutny@peckadesign.cz>"
+	],
+	"main": "src/assets/async.nette.ajax.js",
+	"license": "MIT",
+	"dependencies": {
+		"jquery": ">=1.7",
+		"nette.ajax.js": ">=2.0"
+	}
+}
