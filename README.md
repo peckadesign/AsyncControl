@@ -1,8 +1,20 @@
 # AsyncControl
 
+Trait for asynchronous control rendering.
+
 [![Build Status](https://travis-ci.org/peckadesign/AsyncControl.svg?branch=master)](https://travis-ci.org/peckadesign/AsyncControl)
 
-Trait for asynchronous control rendering.
+## Requirements
+
+- [Nette/Application](https://github.com/nette/application)
+
+## Installation
+
+The best way to install PeckaDesign/AsyncControl is using  [Composer](http://getcomposer.org/):
+
+```sh
+$ composer require pd/async-control
+```
 
 ## Usage
 
