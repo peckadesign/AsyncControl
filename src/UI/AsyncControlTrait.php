@@ -4,7 +4,7 @@ namespace Pd\AsyncControl\UI;
 
 use Nette\Application\UI\Control;
 use Nette\Application\UI\Presenter;
-use Nette\Application\UI\PresenterComponent;
+use Nette\Bridges\ApplicationLatte\Template;
 
 
 /**
@@ -21,7 +21,7 @@ trait AsyncControlTrait
 
 	public function handleAsyncLoad()
 	{
-		if ( ! $this instanceof PresenterComponent || ! ($presenter = $this->getPresenter(FALSE)) || ! $presenter->isAjax()) {
+		if ( ! $this instanceof Control || ! ($presenter = $this->getPresenter(FALSE)) || ! $presenter->isAjax()) {
 			return;
 		}
 		ob_start(function () {
@@ -49,7 +49,9 @@ trait AsyncControlTrait
 			&& strpos((string) $this->getPresenter()->getParameter(Presenter::SIGNAL_KEY), sprintf('%s-', $this->getUniqueId())) !== 0
 		) {
 			$template = $this->createTemplate();
-			$template->link = new AsyncControlLink($linkMessage, $linkAttributes);
+			if ($template instanceof Template) {
+				$template->add('link', new AsyncControlLink($linkMessage, $linkAttributes));
+			}
 			$template->setFile(__DIR__ . '/templates/asyncLoadLink.latte');
 			$template->render();
 		} elseif (is_callable($this->asyncRenderer)) {
