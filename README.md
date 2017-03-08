@@ -6,6 +6,10 @@ Trait for asynchronous control rendering.
 [![Build Status](https://travis-ci.org/peckadesign/AsyncControl.svg?branch=master)](https://travis-ci.org/peckadesign/AsyncControl)
 [![Latest Stable Version](https://poser.pugx.org/pd/async-control/v/stable)](https://github.com/peckadesign/AsyncControl/releases)
 
+Useful for loading data from external sources or any time-expensive controls.
+
+![AsyncControl](async.gif?raw=true)
+
 ## Requirements
 
 - [Nette/Application](https://github.com/nette/application)
