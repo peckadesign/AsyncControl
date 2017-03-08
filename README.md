@@ -2,7 +2,9 @@
 
 Trait for asynchronous control rendering.
 
+[![Downloads total](https://img.shields.io/packagist/dt/pd/async-control.svg)](https://packagist.org/packages/pd/async-control)
 [![Build Status](https://travis-ci.org/peckadesign/AsyncControl.svg?branch=master)](https://travis-ci.org/peckadesign/AsyncControl)
+[![Latest Stable Version](https://poser.pugx.org/pd/async-control/v/stable)](https://github.com/peckadesign/AsyncControl/releases)
 
 ## Requirements
 
