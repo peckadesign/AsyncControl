@@ -57,6 +57,10 @@ or with custom message
 {control comments:async 'Show comments'}
 ```
 
+### Frontend
+
+Without any javascript this trait will show only load button. With simple script you can automatically load all asynchronous components on page load using nette ajax extension `src/assets/async.nette.ajax.js`. Alternatively you can implement your own handling, e.g. component loading while scrolling through page. This is handy if you have long pages. You do not need to wait till all data are loaded and you can show main data much faster. Additional data will be loaded depending on your JS implementation right after page load or on demand.
+
 ## Configuring
 
 You can set default message and attributes used for loading link in `bootstrap.php`
