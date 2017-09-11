@@ -17,7 +17,7 @@
 				$.nette.ajax({
 					url: $this.data('asyncLink') || $this.attr('href'),
 					off: ['history', 'unique']
-				}, $this, new CustomEvent('asyncLoad'));
+				}, $this, new Event('asyncLoad'));
 			});
 		}
 	});
