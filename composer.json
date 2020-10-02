@@ -22,7 +22,7 @@
 	],
 	"require": {
 		"php": "~7.0",
-		"nette/application": "^2.2"
+		"nette/application": ">= 2.2.10 < 2.3.0"
 	},
 	"require-dev": {
 		"phpstan/phpstan": "~0.6.0",
