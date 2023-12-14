@@ -8,7 +8,7 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 
 /**
- * @method render
+ * @method render()
  */
 trait AsyncControlTrait
 {
@@ -19,7 +19,7 @@ trait AsyncControlTrait
 	protected $asyncRenderer;
 
 
-	public function handleAsyncLoad()
+	public function handleAsyncLoad(): void
 	{
 		if ( ! $this instanceof Control || ! ($presenter = $this->getPresenter(FALSE)) || ! $presenter->isAjax()) {
 			return;
@@ -31,9 +31,6 @@ trait AsyncControlTrait
 		} catch (\Throwable $e) {
 			ob_end_clean();
 			throw $e;
-		} catch (\Exception $e) {
-			ob_end_clean();
-			throw $e;
 		}
 		$content = ob_get_clean();
 		$presenter->getPayload()->snippets[$this->getSnippetId('async')] = $content;
@@ -41,7 +38,7 @@ trait AsyncControlTrait
 	}
 
 
-	public function renderAsync(string $linkMessage = NULL, array $linkAttributes = NULL)
+	public function renderAsync(?string $linkMessage = NULL, ?array $linkAttributes = NULL): void
 	{
 		if (
 			$this instanceof Control
@@ -62,7 +59,7 @@ trait AsyncControlTrait
 	}
 
 
-	public function setAsyncRenderer(callable $renderer)
+	public function setAsyncRenderer(callable $renderer): void
 	{
 		$this->asyncRenderer = $renderer;
 	}

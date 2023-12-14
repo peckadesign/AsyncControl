@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ 7.0, 7.1 ]
+        php: [ 7.4, 8.0 ]
     steps:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@v2
@@ -18,7 +18,7 @@ jobs:
 
       - run: make composer
 
-      - if: matrix.php == '7.1'
+      - if: matrix.php == '7.4'
         run: make phpstan
 
       - run: make run-tests

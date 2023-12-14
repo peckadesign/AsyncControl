@@ -6,25 +6,21 @@ final class AsyncControlLink
 {
 
 	private static $defaultMessage = 'Load content';
-	private static $defaultAttributes = [];
-	/**
-	 * @var string
-	 */
-	private $message;
-	/**
-	 * @var array
-	 */
-	private $attributes;
 
+	private static $defaultAttributes = [];
+
+	private string $message;
+
+	private array $attributes;
 
 	public function __construct(
-		string $message = NULL,
-		array $attributes = NULL
-	) {
-		$this->message = $message === NULL ? self::$defaultMessage : $message;
-		$this->attributes = $attributes === NULL ? self::$defaultAttributes : $attributes;
+		?string $message = null,
+		?array $attributes = null
+	)
+	{
+		$this->message = $message === null ? self::$defaultMessage : $message;
+		$this->attributes = $attributes === null ? self::$defaultAttributes : $attributes;
 	}
-
 
 	public static function setDefault(string $message, array $attributes = [])
 	{
@@ -32,15 +28,14 @@ final class AsyncControlLink
 		self::$defaultAttributes = $attributes;
 	}
 
-
 	public function getMessage(): string
 	{
 		return $this->message;
 	}
 
-
 	public function getAttributes(): array
 	{
 		return $this->attributes;
 	}
+
 }

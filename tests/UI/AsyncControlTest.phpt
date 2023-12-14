@@ -3,8 +3,9 @@
 namespace Pd\AsyncControl\UI;
 
 use Mockery;
-use Nette\Application\UI\ITemplate;
-use Nette\Application\UI\ITemplateFactory;
+
+use Nette\Bridges\ApplicationLatte\TemplateFactory;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Application\UI\Presenter;
 use Tester\Assert;
 use Tester\TestCase;
@@ -12,23 +13,24 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+\Tester\Environment::bypassFinals();
 
+/**
+ * @testCase
+ */
 final class AsyncControlTest extends TestCase
 {
-
 	const VALID_SIGNAL = 'control-form-submit';
 	const FRAGMENT_PARAMETER = '_escaped_fragment_';
 
 
-	public function testHandleAjax()
+	public function testHandleAjax(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('isAjax')->once()->andReturn(TRUE);
-		$presenter->shouldReceive('getPayload')->andReturn($payload = new \stdClass);
+		$presenter->shouldReceive('getPayload')->andReturn($payload = new \stdClass());
 		$presenter->shouldReceive('sendPayload')->once();
-		/**
-		 * @var AsyncControl|Mockery\Mock $control
-		 */
+
 		$control = Mockery::mock(AsyncControl::class)->makePartial();
 		$control->shouldReceive('getPresenter')->andReturn($presenter);
 		$renderedContent = 'rendered content';
@@ -43,7 +45,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testHandleNoAjax()
+	public function testHandleNoAjax(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('isAjax')->once()->andReturn(FALSE);
@@ -60,18 +62,19 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderAsyncLoadLink()
+	public function testRenderAsyncLoadLink(): void
 	{
 		/**
 		 * @var AsyncControl|Mockery\Mock $control
 		 */
 		$control = Mockery::mock(AsyncControl::class)->makePartial();
 
-		$template = Mockery::mock(ITemplate::class);
+		$template = Mockery::mock(Template::class);
+		$template->shouldReceive('add')->once()->with('link', Mockery::type(AsyncControlLink::class));
 		$template->shouldReceive('setFile')->once()->withAnyArgs();
 		$template->shouldReceive('render')->once();
 
-		$templateFactory = Mockery::mock(ITemplateFactory::class);
+		$templateFactory = Mockery::mock(TemplateFactory::class);
 		$templateFactory->shouldReceive('createTemplate')->once()->with($control)->andReturn($template);
 
 		$presenter = Mockery::mock(Presenter::class);
@@ -79,13 +82,13 @@ final class AsyncControlTest extends TestCase
 		$presenter->shouldReceive('getParameter')->once()->with(Presenter::SIGNAL_KEY)->andReturn(NULL);
 		$presenter->shouldReceive('getTemplateFactory')->once()->andReturn($templateFactory);
 
-		$control->shouldReceive('getPresenter')->andReturn($presenter);
+		$control->shouldReceive('getPresenter')->times(3)->andReturn($presenter);
 		$control->shouldReceive('getUniqueId')->once()->andReturn('control');
 		$control->renderAsync();
 	}
 
 
-	public function testRenderWithSignal()
+	public function testRenderWithSignal(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn(NULL);
@@ -101,7 +104,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderWithFragment()
+	public function testRenderWithFragment(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn('');
@@ -115,7 +118,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderAsyncRenderer()
+	public function testRenderAsyncRenderer(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn(NULL);
@@ -135,7 +138,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		parent::tearDown();
 		Mockery::close();
