@@ -1,7 +1,5 @@
 parameters:
 	ignoreErrors:
-		- '#Cannot call method getParameter\(\) on Nette\\Application\\UI\\Presenter\|null\.#'
-		- '#Cannot cast mixed to string#'
 	fileExtensions:
 		- phpt
 
