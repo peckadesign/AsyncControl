@@ -12,7 +12,9 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-
+/**
+ * @testCase
+ */
 final class AsyncControlTest extends TestCase
 {
 
@@ -20,7 +22,7 @@ final class AsyncControlTest extends TestCase
 	const FRAGMENT_PARAMETER = '_escaped_fragment_';
 
 
-	public function testHandleAjax()
+	public function testHandleAjax(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('isAjax')->once()->andReturn(TRUE);
@@ -43,7 +45,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testHandleNoAjax()
+	public function testHandleNoAjax(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('isAjax')->once()->andReturn(FALSE);
@@ -60,7 +62,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderAsyncLoadLink()
+	public function testRenderAsyncLoadLink(): void
 	{
 		/**
 		 * @var AsyncControl|Mockery\Mock $control
@@ -85,7 +87,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderWithSignal()
+	public function testRenderWithSignal(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn(NULL);
@@ -101,7 +103,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderWithFragment()
+	public function testRenderWithFragment(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn('');
@@ -115,7 +117,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	public function testRenderAsyncRenderer()
+	public function testRenderAsyncRenderer(): void
 	{
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getParameter')->once()->with(self::FRAGMENT_PARAMETER)->andReturn(NULL);
@@ -135,7 +137,7 @@ final class AsyncControlTest extends TestCase
 	}
 
 
-	protected function tearDown()
+	protected function tearDown(): void
 	{
 		parent::tearDown();
 		Mockery::close();

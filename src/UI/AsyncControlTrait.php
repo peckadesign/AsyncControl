@@ -19,7 +19,7 @@ trait AsyncControlTrait
 	protected $asyncRenderer;
 
 
-	public function handleAsyncLoad()
+	public function handleAsyncLoad(): void
 	{
 		if ( ! $this instanceof Control || ! ($presenter = $this->getPresenter(FALSE)) || ! $presenter->isAjax()) {
 			return;
@@ -37,8 +37,11 @@ trait AsyncControlTrait
 		$presenter->sendPayload();
 	}
 
-
-	public function renderAsync(string $linkMessage = NULL, array $linkAttributes = NULL)
+	/**
+	 * @param array<string, string> $linkAttributes
+	 * @return void
+	 */
+	public function renderAsync(string $linkMessage = NULL, array $linkAttributes = NULL): void
 	{
 		if (
 			$this instanceof Control
@@ -59,7 +62,7 @@ trait AsyncControlTrait
 	}
 
 
-	public function setAsyncRenderer(callable $renderer)
+	public function setAsyncRenderer(callable $renderer): void
 	{
 		$this->asyncRenderer = $renderer;
 	}
