@@ -8,7 +8,7 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 
 /**
- * @method render
+ * @method render()
  */
 trait AsyncControlTrait
 {
@@ -29,9 +29,6 @@ trait AsyncControlTrait
 		try {
 			$this->renderAsync();
 		} catch (\Throwable $e) {
-			ob_end_clean();
-			throw $e;
-		} catch (\Exception $e) {
 			ob_end_clean();
 			throw $e;
 		}

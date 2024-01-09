@@ -1,10 +1,6 @@
 parameters:
 	ignoreErrors:
-		- '#Call to an undefined method [a-zA-Z0-9\\_]+::renderAsync\(\)#'
-		- '#Call to an undefined method [a-zA-Z0-9\\_]+::render\(\)#'
 	fileExtensions:
 		- phpt
 
-	autoload_directories:
-#		- %rootDir%/../../../test
-
+	treatPhpDocTypesAsCertain: false
