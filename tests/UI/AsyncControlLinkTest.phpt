@@ -8,11 +8,13 @@ use Tester\TestCase;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-
+/**
+ * @testCase
+ */
 final class AsyncControlLinkTest extends TestCase
 {
 
-	public function testLink()
+	public function testLink(): void
 	{
 		$link = new AsyncControlLink;
 		Assert::equal('Load content', $link->getMessage());
