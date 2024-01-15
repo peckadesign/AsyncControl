@@ -43,9 +43,7 @@ trait AsyncControlTrait
 	public function renderAsync(string $linkMessage = NULL, array $linkAttributes = NULL): void
 	{
 		$template = $this->createTemplate();
-		if ($template instanceof Template) {
-			$template->add('link', new AsyncControlLink($linkMessage, $linkAttributes));
-		}
+		$template->link = new AsyncControlLink($linkMessage, $linkAttributes);
 		$template->setFile(__DIR__ . '/templates/asyncLoadLink.latte');
 		$template->render();
 	}

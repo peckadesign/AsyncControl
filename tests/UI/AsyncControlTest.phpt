@@ -62,13 +62,19 @@ final class AsyncControlTest extends TestCase
 	{
 		$control = Mockery::mock(AsyncControl::class)->makePartial();
 
-		$template = Mockery::mock(Template::class);
-		$template->shouldReceive('add')->once()->with('link', Mockery::type(AsyncControlLink::class));
+		$template = Mockery::mock(Template::class)->makePartial();
+		$template->link = Mockery::type(AsyncControlLink::class);
 		$template->shouldReceive('setFile')->once()->withAnyArgs();
 		$template->shouldReceive('render')->once();
 
 		$templateFactory = Mockery::mock(TemplateFactory::class);
-		$templateFactory->shouldReceive('createTemplate')->once()->with($control)->andReturn($template);
+		$templateFactory
+			->shouldReceive('createTemplate')
+			->once()
+			->withArgs(
+				fn ($recievedControl) => $recievedControl === $control
+			)
+			->andReturn($template);
 
 		$presenter = Mockery::mock(Presenter::class);
 		$presenter->shouldReceive('getTemplateFactory')->once()->andReturn($templateFactory);
